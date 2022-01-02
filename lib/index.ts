@@ -1,1 +1,1 @@
-export { Caching } from "./Caching";
+export { Caching, generateCacheKey } from "./Caching";
