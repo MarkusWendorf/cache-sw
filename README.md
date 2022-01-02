@@ -36,3 +36,16 @@ const caching = new Caching({
   generateCacheKey: async (request) => request.url + ":" + request.headers.get("x-my-header")
 });
 ```
+
+You can extend the default cache key generator by importing ```generateCacheKey```.
+```typescript
+import { Caching, generateCacheKey } from "cache-sw";
+
+const caching = new Caching({
+  routeMatcher: (request) => ...
+  generateCacheKey: async (request) => {
+    const cacheKey = await generateCacheKey(request);
+    return cacheKey + ":" + request.headers.get("x-my-header");
+  }
+});
+```
