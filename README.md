@@ -19,6 +19,28 @@ self.addEventListener("fetch", (event) => {
 });
 ```
 
+## Caching strategies
+
+There are 3 different cache strategies:
+* NetworkFirst
+* CacheFirst
+* StaleWhileRevalidate
+
+### NetworkFirst
+- Try to fetch the response from the network
+  - if the request succeeds the response will be cached and returned 
+  - if the request fails due to network errors, fall back to a cached response if available (status 4xx/5xx are not considered)
+  - otherwise rethrow the network error
+
+### CacheFirst
+- Return a cached response for the request
+  - if no cached response is available reach out to the network
+  - if the call to the network succeeds the response will be cached
+
+### StaleWhileRevalidate
+- Return a cached response for the request immediately (stale)
+  - fetch and cache a fresh response from the network in the background (revalidate)
+
 ## Cacheable requests / cache key
 
 By default both GET and POST requests are cacheable:
